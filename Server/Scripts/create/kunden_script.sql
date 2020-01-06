@@ -10,8 +10,8 @@ CREATE TABLE T_KUNDEN(
 DELETE T_KUNDEN;
 
 -- insert
-INSERT INTO T_KUNDEN (person, adresse, stammkunde) VALUES (1,1,'y');
-INSERT INTO T_KUNDEN (person, adresse, stammkunde) VALUES (2,2,'y');
-INSERT INTO T_KUNDEN (person, adresse, stammkunde) VALUES (3,3,'n');
-INSERT INTO T_KUNDEN (person, adresse, stammkunde) VALUES (4,4,'n');
-INSERT INTO T_KUNDEN (person, adresse, stammkunde) VALUES (5,5,'n');
+INSERT INTO T_KUNDEN (id, person_fk, adresse_fk, stammkunde) VALUES (1,1,1,'y');
+INSERT INTO T_KUNDEN (id, person_fk, adresse_fk, stammkunde) VALUES (2,2,2,'y');
+INSERT INTO T_KUNDEN (id, person_fk, adresse_fk, stammkunde) VALUES (3,3,3,'n');
+INSERT INTO T_KUNDEN (id, person_fk, adresse_fk, stammkunde) VALUES (4,4,4,'n');
+INSERT INTO T_KUNDEN (id, person_fk, adresse_fk, stammkunde) VALUES (5,5,5,'n');

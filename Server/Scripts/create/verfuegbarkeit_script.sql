@@ -10,8 +10,8 @@ id NUMBER GENERATED ALWAYS AS IDENTITY,
 DELETE T_VERFUEGBARKEIT;
 
 -- insert
-INSERT INTO T_VERFUEGBARKEIT (car_fk, standort_fk, verfuegbar) VALUES (1,1,'y');
-INSERT INTO T_VERFUEGBARKEIT (car_fk, standort_fk, verfuegbar) VALUES (2,1,'n');
-INSERT INTO T_VERFUEGBARKEIT (car_fk, standort_fk, verfuegbar) VALUES (3,2,'y');
-INSERT INTO T_VERFUEGBARKEIT (car_fk, standort_fk, verfuegbar) VALUES (4,3,'y');
-INSERT INTO T_VERFUEGBARKEIT (car_fk, standort_fk, verfuegbar) VALUES (5,3,'y');
+INSERT INTO T_VERFUEGBARKEIT (id, car_fk, standort_fk, verfuegbar) VALUES (1,1,1,'y');
+INSERT INTO T_VERFUEGBARKEIT (id, car_fk, standort_fk, verfuegbar) VALUES (2,2,1,'n');
+INSERT INTO T_VERFUEGBARKEIT (id, car_fk, standort_fk, verfuegbar) VALUES (3,3,2,'y');
+INSERT INTO T_VERFUEGBARKEIT (id, car_fk, standort_fk, verfuegbar) VALUES (4,4,3,'y');
+INSERT INTO T_VERFUEGBARKEIT (id, car_fk, standort_fk, verfuegbar) VALUES (5,5,3,'y');

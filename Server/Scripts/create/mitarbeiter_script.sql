@@ -10,5 +10,5 @@ CREATE TABLE T_MITARBEITER(
 DELETE T_MITARBEITER;
 
 -- insert
-INSERT INTO T_MITARBEITER (person, standort, gehalt) VALUES (1, 2, 2430.69);
-INSERT INTO T_MITARBEITER (person, standort, gehalt) VALUES (2, 1, 1030.30);
+INSERT INTO T_MITARBEITER (id, person_fk, standort_fk, gehalt) VALUES (1, 1, 2, 2430.69);
+INSERT INTO T_MITARBEITER (id, person_fk, standort_fk, gehalt) VALUES (2, 2, 1, 1030.30);
