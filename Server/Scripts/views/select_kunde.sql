@@ -5,6 +5,7 @@
 /** Description: This view returns all neccessary informations about a customer.
 /**
 /*********************************************************************
+*/
 
 CREATE OR REPLACE VIEW select_kunde AS
   SELECT 

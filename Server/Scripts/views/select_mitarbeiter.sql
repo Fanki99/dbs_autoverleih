@@ -5,6 +5,7 @@
 /** Description: This view returns all neccessary informations about an employee.
 /**
 /*********************************************************************
+*/
 
 CREATE OR REPLACE VIEW select_mitarbeiter AS
   SELECT 
