@@ -1,1 +1,0 @@
-INSERT INTO T_CARS(marke, modell, preisklasse) VALUES('test', 'testttt', 2);
