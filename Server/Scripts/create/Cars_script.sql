@@ -10,9 +10,13 @@ CREATE TABLE T_CARS(
 DELETE T_CARS;
 
 -- insert
-INSERT INTO T_CARS (marke, modell, preisklasse) VALUES ('VW', 'Jetta', 'Vollaustattung');
-INSERT INTO T_CARS (marke, modell, preisklasse) VALUES ('Mercedes', 'A45 AMG', 'Mittelklasse');
-INSERT INTO T_CARS (marke, modell, preisklasse) VALUES ('Mercedes', 'C63', 'Minimale Ausstatung');
-INSERT INTO T_CARS (marke, modell, preisklasse) VALUES ('Audi', 'A8', 'Vollaustattung');
-INSERT INTO T_CARS (marke, modell, preisklasse) VALUES ('Ford', 'Focus', 'Mittelklasse');
-INSERT INTO T_CARS (marke, modell, preisklasse) VALUES ('VW', 'Polo', 'Mittelklasse');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (1,'VW', 'Jetta', 'Vollaustattung');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (2,'Mercedes', 'A45 AMG', 'Mittelklasse');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (3,'Mercedes', 'C63', 'Minimale Ausstattung');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (4,'Audi', 'A8', 'Vollaustattung');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (5,'Ford', 'Focus', 'Mittelklasse');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (6,'VW', 'Polo', 'Mittelklasse');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (7,'VW', 'Golf', 'Vollaustattung');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (8,'Audi', 'R8', 'Vollaustattung');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (9,'Mini', 'Cooper', 'Minimale Ausstattung');
+INSERT INTO T_CARS (id, marke, modell, ausstattung) VALUES (10,'Tesla', 'Model X', 'Vollaustattung');

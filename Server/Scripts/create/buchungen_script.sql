@@ -13,4 +13,4 @@ CREATE TABLE T_BUCHUNGEN(
 DELETE T_BUCHUNGEN;
 
 -- insert
-INSERT INTO T_BUCHUNGEN (kunde_fk, standort_fk, car_fk, datum_von, datum_bis, summe) VALUES (1,2,3,to_date('01/05/2019', 'dd/mm/yyyy'),to_date('03/05/2019', 'dd/mm/yyyy'), 0);
+INSERT INTO T_BUCHUNGEN (id, kunde_fk, standort_fk, car_fk, datum_von, datum_bis, summe) VALUES (1,1,2,3,to_date('01/05/2019', 'dd/mm/yyyy'),to_date('03/05/2019', 'dd/mm/yyyy'), 0);
