@@ -16,115 +16,201 @@ namespace Autoverleih
         public Form1()
         {
             InitializeComponent();
-            LoadData();
+            panel_welcome.BringToFront();
         }
 
-        //public object Form1_Load()
+        #region alt
+        //private void LoadData()
 
         //{
-        //   return LoadData();
+
+        //    try
+
+        //    {
+
+        //        string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=SYSTEM;Password=admin;";
+
+        //        using (OracleConnection con = new OracleConnection(ConString))
+
+        //        {
+
+        //            OracleCommand cmd = new OracleCommand("SELECT * FROM T_CARS", con);
+
+        //            OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+        //            DataSet ds = new DataSet();
+
+        //            oda.Fill(ds);
+
+        //            if (ds.Tables.Count > 0)
+
+        //            {
+
+        //                dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+        //            }
+
+        //        }
+
+        //    }
+
+        //    catch (Exception ex)
+
+        //    {
+
+        //        MessageBox.Show(ex.ToString());
+        //        throw new Exception("Yeet");
+        //    }
+
         //}
 
 
+        //private void AddEntry()
 
-        private void LoadData()
+        //{
 
+        //    try
+
+        //    {
+        //        TextBox TBox1 = (TextBox)Controls.Find("textBox1", true)[0];//Retrieve controls by name 
+        //        TextBox TBox2 = (TextBox)Controls.Find("textBox2", true)[0];//Retrieve controls by name      
+
+        //        string sqlstring = "INSERT INTO T_CARS(marke, modell, preisklasse) VALUES('" + TBox1.Text + "', '" + TBox2.Text + "', 2)";
+        //        string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=SYSTEM;Password=admin;";
+
+        //        using (OracleConnection con = new OracleConnection(ConString))
+
+        //        {
+
+
+        //            OracleCommand cmd = new OracleCommand(sqlstring, con);
+
+        //            //OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+        //            con.Open();
+        //            cmd.ExecuteNonQuery();
+        //            con.Close();
+
+
+        //        }
+        //    }
+
+        //    catch (Exception ex)
+
+        //    {
+
+        //        MessageBox.Show(ex.ToString());
+
+        //    }
+
+        //}
+        #endregion
+
+        private void personenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            panel_personen.Visible = true;
+            panel_personen.BringToFront();
+        }
+       
+        private void buchungStornierenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel_buchungen_storno.Visible = true;
+            panel_buchungen_storno.BringToFront();
+        }
 
-            try
-
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox2.Checked == true)
             {
-
-                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=SYSTEM;Password=admin;";
-
-                using (OracleConnection con = new OracleConnection(ConString))
-
-                {
-
-                    OracleCommand cmd = new OracleCommand("SELECT * FROM T_CARS", con);
-
-                    OracleDataAdapter oda = new OracleDataAdapter(cmd);
-
-                    DataSet ds = new DataSet();
-
-                    oda.Fill(ds);
-
-                    if (ds.Tables.Count > 0)
-
-                    {
-
-                        dataGridView1.DataSource = ds.Tables[0].DefaultView;
-
-                    }
-
-                }
-
-            }
-
-            catch (Exception ex)
-
+                panel_mitarbeiter.Visible = true;
+                panel_mitarbeiter.BringToFront();
+            } else
             {
-
-                MessageBox.Show(ex.ToString());
-                throw new Exception("Yeet");
+                panel_mitarbeiter.Visible = false;
+                panel_mitarbeiter.SendToBack();
             }
-
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void buchungEintragenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //LoadData();
+            panel_buchungen.Visible = true;
+            panel_buchungen.BringToFront();
+            Initialize_Buchungen();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void schadenEintragenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel_schaeden.Visible = true;
+            panel_schaeden.BringToFront();
+            Initialize_Schaeden();
+        }
+
+        private void schadenRepariertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel_schaeden_storno.Visible = true;
+            panel_schaeden_storno.BringToFront();
+            Initialize_Schaeden_Storno();
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            panel_buchungen.Visible = true;
+            panel_buchungen.BringToFront();
+        }
+
+        #region funktionen
+        private void Initialize_Buchungen()
+        {
+            //try
+            //{
+
+            //    string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=SYSTEM;Password=admin;";
+
+            //    using (OracleConnection con = new OracleConnection(ConString))
+
+            //    {
+
+            //        OracleCommand cmd = new OracleCommand("SELECT * FROM T_STANDORTE", con);
+
+            //        OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+            //        DataSet ds = new DataSet();
+
+            //        oda.Fill(ds);
+
+            //        if (ds.Tables.Count > 0)
+
+            //        {
+
+            //            comboBox1.DataSource = ds.Tables[0].Columns[0];
+
+            //        }
+
+            //    }
+
+            //}
+
+            //catch (Exception ex)
+
+            //{
+
+            //    MessageBox.Show(ex.ToString());
+            //    throw new Exception("Yeet");
+            //}
+        }
+
+        private void Initialize_Schaeden()
+        { 
+        
+        }
+
+        private void Initialize_Schaeden_Storno()
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddEntry();
-        }
-        private void AddEntry()
+        #endregion
 
-        {
-
-            try
-
-            {
-                TextBox TBox1 = (TextBox)Controls.Find("textBox1", true)[0];//Retrieve controls by name 
-                TextBox TBox2 = (TextBox)Controls.Find("textBox2", true)[0];//Retrieve controls by name      
-
-                string sqlstring = "INSERT INTO T_CARS(marke, modell, preisklasse) VALUES('" + TBox1.Text + "', '" + TBox2.Text + "', 2)";
-                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=SYSTEM;Password=admin;";
-
-                using (OracleConnection con = new OracleConnection(ConString))
-
-                {
-                      
-
-                    OracleCommand cmd = new OracleCommand(sqlstring, con);
-
-                    //OracleDataAdapter oda = new OracleDataAdapter(cmd);
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-
-
-                }
-
-            }
-
-            catch (Exception ex)
-
-            {
-
-                MessageBox.Show(ex.ToString());
-
-            }
-
-        }
+        
     }
 
 }
