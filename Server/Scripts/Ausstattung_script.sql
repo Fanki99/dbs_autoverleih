@@ -1,0 +1,12 @@
+CREATE TABLE T_AUSSTATTUNG(
+    id NUMBER GENERATED ALWAYS AS IDENTITY,
+    ausstattung varchar(4) NOT NULL
+);
+
+delete T_AUSSTATTUNG;
+
+INSERT INTO T_AUSSTATTUNG (ausstattung) VALUES ('voll');
+INSERT INTO T_AUSSTATTUNG (ausstattung) VALUES ('halb');
+INSERT INTO T_AUSSTATTUNG (ausstattung) VALUES ('mind');
+
+
