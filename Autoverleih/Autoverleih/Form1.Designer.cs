@@ -569,16 +569,16 @@
             this.panel_welcome.Controls.Add(this.button7);
             this.panel_welcome.Controls.Add(this.label16);
             this.panel_welcome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_welcome.Location = new System.Drawing.Point(0, 24);
+            this.panel_welcome.Location = new System.Drawing.Point(0, 0);
             this.panel_welcome.Name = "panel_welcome";
-            this.panel_welcome.Size = new System.Drawing.Size(800, 399);
+            this.panel_welcome.Size = new System.Drawing.Size(800, 423);
             this.panel_welcome.TabIndex = 11;
             // 
             // button7
             // 
             this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(318, 218);
+            this.button7.Location = new System.Drawing.Point(318, 230);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(139, 50);
             this.button7.TabIndex = 1;
@@ -602,13 +602,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 423);
-            this.Controls.Add(this.panel_welcome);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.panel_schaeden_storno);
+            this.Controls.Add(this.panel_welcome);
             this.Controls.Add(this.panel_schaeden);
+            this.Controls.Add(this.panel_schaeden_storno);
+            this.Controls.Add(this.panel_buchungen);
             this.Controls.Add(this.panel_personen);
             this.Controls.Add(this.panel_buchungen_storno);
-            this.Controls.Add(this.panel_buchungen);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";

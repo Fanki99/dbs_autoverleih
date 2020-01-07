@@ -1,5 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -155,47 +156,50 @@ namespace Autoverleih
         {
             panel_buchungen.Visible = true;
             panel_buchungen.BringToFront();
+            Initialize_Buchungen();
         }
 
         #region funktionen
         private void Initialize_Buchungen()
         {
-            //try
-            //{
+            try
+            {
 
-            //    string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=SYSTEM;Password=admin;";
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
 
-            //    using (OracleConnection con = new OracleConnection(ConString))
+                using (OracleConnection con = new OracleConnection(ConString))
 
-            //    {
+                {
 
-            //        OracleCommand cmd = new OracleCommand("SELECT * FROM T_STANDORTE", con);
+                    OracleCommand cmd = new OracleCommand("SELECT * FROM select_standorte", con);
 
-            //        OracleDataAdapter oda = new OracleDataAdapter(cmd);
+                    OracleDataAdapter oda = new OracleDataAdapter(cmd);
 
-            //        DataSet ds = new DataSet();
+                    DataSet ds = new DataSet();
 
-            //        oda.Fill(ds);
+                    oda.Fill(ds);
 
-            //        if (ds.Tables.Count > 0)
+                    if (ds.Tables.Count > 0)
 
-            //        {
+                    {
+                        List<string> list = new List<string>();
+                        foreach (DataRow row in ds.Tables[0].Rows) {
+                            list.Add(row["adresse"].ToString());
+                        }
+                        comboBox1.DataSource = list;
+                    }
 
-            //            comboBox1.DataSource = ds.Tables[0].Columns[0];
+                }
 
-            //        }
+            }
 
-            //    }
+            catch (Exception ex)
 
-            //}
+            {
 
-            //catch (Exception ex)
-
-            //{
-
-            //    MessageBox.Show(ex.ToString());
-            //    throw new Exception("Yeet");
-            //}
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
         }
 
         private void Initialize_Schaeden()
@@ -208,9 +212,8 @@ namespace Autoverleih
 
         }
 
-        #endregion
 
-        
+        #endregion
     }
 
 }
