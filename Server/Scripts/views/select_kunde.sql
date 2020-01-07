@@ -1,7 +1,7 @@
 /*********************************************************************
 /**
 /** Table: T_KUNDEN
-/** Developer: if18b053
+/** Developer: if18b053, if18b045
 /** Description: This view returns all neccessary informations about a customer.
 /**
 /*********************************************************************
@@ -21,6 +21,6 @@ CREATE OR REPLACE VIEW select_kunde AS
   	a.hausnummer AS hausnummer,
   	a.plz AS plz,
   	a.ort AS ort
-  FROM T_KUNDEN AS k
-  INNER JOIN T_PERSONEN AS p ON k.person_fk = p.id
-  INNER JOIN T_ADRESSEN AS a ON k.adresse_fk = a.id;
+  FROM T_KUNDEN k
+  INNER JOIN T_PERSONEN p ON k.person_fk = p.id
+  INNER JOIN T_ADRESSEN a ON k.adresse_fk = a.id;
