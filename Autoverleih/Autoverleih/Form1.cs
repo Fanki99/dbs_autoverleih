@@ -18,6 +18,10 @@ namespace Autoverleih
         {
             InitializeComponent();
             panel_welcome.BringToFront();
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "dd.MM.yyyy";
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.CustomFormat = "dd.MM.yyyy";
         }
 
         #region alt
@@ -171,22 +175,45 @@ namespace Autoverleih
 
                 {
 
-                    OracleCommand cmd = new OracleCommand("SELECT * FROM select_standorte", con);
+                    OracleCommand cmd = new OracleCommand("select * from table(return_standorte())", con);
 
                     OracleDataAdapter oda = new OracleDataAdapter(cmd);
 
-                    DataSet ds = new DataSet();
+                    DataTable dt = new DataTable();
 
-                    oda.Fill(ds);
 
-                    if (ds.Tables.Count > 0)
+                    oda.Fill(dt);
+
+
+                    if (dt.Rows.Count > 0)
 
                     {
                         List<string> list = new List<string>();
-                        foreach (DataRow row in ds.Tables[0].Rows) {
-                            list.Add(row["adresse"].ToString());
+                        foreach (DataRow row in dt.Rows) {
+                            list.Add(row["text"].ToString());
                         }
                         comboBox1.DataSource = list;
+                    }
+
+                    OracleCommand cmd2 = new OracleCommand("select * from table(return_kunden())", con);
+
+                    OracleDataAdapter oda2 = new OracleDataAdapter(cmd2);
+
+                    DataTable dt2 = new DataTable();
+
+
+                    oda2.Fill(dt2);
+
+
+                    if (dt2.Rows.Count > 0)
+
+                    {
+                        List<string> list2 = new List<string>();
+                        foreach (DataRow row in dt2.Rows)
+                        {
+                            list2.Add(row["text"].ToString());
+                        }
+                        comboBox5.DataSource = list2;
                     }
 
                 }
@@ -203,17 +230,206 @@ namespace Autoverleih
         }
 
         private void Initialize_Schaeden()
-        { 
-        
+        {
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+
+                    OracleCommand cmd = new OracleCommand("select * from table(return_cars())", con);
+
+                    OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+                    DataTable dt = new DataTable();
+
+
+                    oda.Fill(dt);
+
+
+                    if (dt.Rows.Count > 0)
+
+                    {
+                        List<string> list = new List<string>();
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            list.Add(row["text"].ToString());
+                        }
+                        comboBox4.DataSource = list;
+                    }
+
+                }
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
         }
 
         private void Initialize_Schaeden_Storno()
         {
+            try
+            {
 
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+
+                    OracleCommand cmd = new OracleCommand("select * from table(return_schaden())", con);
+
+                    OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+                    DataTable dt = new DataTable();
+
+
+                    oda.Fill(dt);
+
+
+                    if (dt.Rows.Count > 0)
+
+                    {
+                        List<string> list = new List<string>();
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            list.Add(row["id"] + " - " + row["schaden"].ToString() + " - " + row["car"].ToString());
+                        }
+                        checkedListBox3.DataSource = list;
+                    }
+
+                }
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
+        }
+        #endregion
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+                    OracleCommand cmd = new OracleCommand("schaden_repaired", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("schaden_id", OracleDbType.Int32).Value = checkedListBox3.CheckedItems[0].ToString().Split(' ')[0];
+
+                    con.Open();
+                    OracleDataAdapter da = new OracleDataAdapter(cmd);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Schaden als repariert gemeldet.");
+                }
+            }
+
+            catch (Exception ex)
+
+            {
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
 
-        #endregion
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+                    OracleCommand cmd = new OracleCommand("add_booking", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("kunde", OracleDbType.Varchar2).Value = comboBox5.SelectedItem;
+                    cmd.Parameters.Add("standort", OracleDbType.Varchar2).Value = comboBox1.SelectedItem;
+                    cmd.Parameters.Add("car", OracleDbType.Varchar2).Value = checkedListBox1.CheckedItems[0];
+                    cmd.Parameters.Add("von", OracleDbType.Varchar2).Value = dateTimePicker1.Value.Date.ToString().Split(' ')[0];
+                    cmd.Parameters.Add("bis", OracleDbType.Varchar2).Value = dateTimePicker2.Value.Date.ToString().Split(' ')[0];
+
+                    con.Open();
+                    OracleDataAdapter da = new OracleDataAdapter(cmd);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Buchung eingetragen.");
+                }
+            }
+
+            catch (Exception ex)
+
+            {
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+
+                    OracleCommand cmd = new OracleCommand("select * from table(return_cars_date('"+comboBox1.SelectedItem+"'))", con);
+
+                    OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+                    DataTable dt = new DataTable();
+
+
+                    oda.Fill(dt);
+
+
+                    if (dt.Rows.Count > 0)
+
+                    {
+                        List<string> list = new List<string>();
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            list.Add(row["text"].ToString());
+                        }
+                        checkedListBox1.DataSource = list;
+                    }
+
+                }
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
+        }
     }
 
 }

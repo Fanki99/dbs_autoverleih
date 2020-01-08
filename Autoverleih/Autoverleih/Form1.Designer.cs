@@ -76,12 +76,12 @@
             this.panel_schaeden_storno = new System.Windows.Forms.Panel();
             this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
             this.button6 = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.panel_welcome = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel_buchungen.SuspendLayout();
             this.panel_personen.SuspendLayout();
@@ -160,6 +160,8 @@
             // panel_buchungen
             // 
             this.panel_buchungen.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panel_buchungen.Controls.Add(this.comboBox5);
+            this.panel_buchungen.Controls.Add(this.label13);
             this.panel_buchungen.Controls.Add(this.button2);
             this.panel_buchungen.Controls.Add(this.checkedListBox1);
             this.panel_buchungen.Controls.Add(this.button1);
@@ -183,6 +185,7 @@
             this.button2.TabIndex = 8;
             this.button2.Text = "Buchung abschließen";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // checkedListBox1
             // 
@@ -200,6 +203,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Verfügbarkeit checken";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker2
             // 
@@ -512,8 +516,6 @@
             this.panel_schaeden_storno.BackColor = System.Drawing.Color.Yellow;
             this.panel_schaeden_storno.Controls.Add(this.checkedListBox3);
             this.panel_schaeden_storno.Controls.Add(this.button6);
-            this.panel_schaeden_storno.Controls.Add(this.label13);
-            this.panel_schaeden_storno.Controls.Add(this.dateTimePicker5);
             this.panel_schaeden_storno.Controls.Add(this.label15);
             this.panel_schaeden_storno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_schaeden_storno.Location = new System.Drawing.Point(0, 0);
@@ -526,7 +528,7 @@
             this.checkedListBox3.FormattingEnabled = true;
             this.checkedListBox3.Location = new System.Drawing.Point(17, 52);
             this.checkedListBox3.Name = "checkedListBox3";
-            this.checkedListBox3.Size = new System.Drawing.Size(481, 229);
+            this.checkedListBox3.Size = new System.Drawing.Size(481, 274);
             this.checkedListBox3.TabIndex = 7;
             // 
             // button6
@@ -537,22 +539,7 @@
             this.button6.TabIndex = 6;
             this.button6.Text = "Schaden repariert";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(16, 296);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(62, 13);
-            this.label13.TabIndex = 5;
-            this.label13.Text = "repariert am";
-            // 
-            // dateTimePicker5
-            // 
-            this.dateTimePicker5.Location = new System.Drawing.Point(16, 312);
-            this.dateTimePicker5.Name = "dateTimePicker5";
-            this.dateTimePicker5.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker5.TabIndex = 4;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label15
             // 
@@ -597,16 +584,33 @@
             this.label16.Text = "Willkommen";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(15, 273);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(121, 21);
+            this.comboBox5.TabIndex = 10;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 256);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(38, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Kunde";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 423);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panel_buchungen);
+            this.Controls.Add(this.panel_schaeden_storno);
             this.Controls.Add(this.panel_welcome);
             this.Controls.Add(this.panel_schaeden);
-            this.Controls.Add(this.panel_schaeden_storno);
-            this.Controls.Add(this.panel_buchungen);
             this.Controls.Add(this.panel_personen);
             this.Controls.Add(this.panel_buchungen_storno);
             this.MainMenuStrip = this.menuStrip1;
@@ -681,13 +685,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel_schaeden_storno;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker dateTimePicker5;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckedListBox checkedListBox3;
         private System.Windows.Forms.Panel panel_welcome;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.Label label13;
     }
 }
 
