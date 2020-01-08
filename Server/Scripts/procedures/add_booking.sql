@@ -1,3 +1,17 @@
+/*********************************************************************
+/**
+/** Procedure add_booking
+/** In: kunde – the customer
+/** In: standort – place where car was taken.
+/** In: car – the car.
+/** In: von – starting date.
+/** In: bis – end date.
+/** Developer: if18b053, if18b045
+/** Description: This procedure adds a booking.
+/** 
+/*********************************************************************
+*/
+
 CREATE OR REPLACE PROCEDURE add_booking
    ( kunde IN varchar2, standort IN varchar2, car IN varchar2, von IN varchar2, bis IN varchar2)
 IS

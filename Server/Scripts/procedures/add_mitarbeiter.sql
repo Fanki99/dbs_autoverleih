@@ -1,16 +1,38 @@
-CREATE OR REPLACE PROCEDURE add_mitarbeiter
-   ( vorname IN varchar2, nachname IN varchar2, geburtsdatum IN varchar2, fuehrerschein IN varchar2, stammkunde IN varchar2, )
-IS
- search_kunde number;
- search_standort number; 
- search_car number;
-BEGIN
-    select k.id into search_kunde from t_kunden k join t_personen p on k.person_fk = p.id where concat(concat(p.vorname,' '),p.nachname) = kunde;
-    select s.id into search_standort from t_standorte s join t_adressen a on s.adresse_fk = a.id where a.strasse = standort;
-    select c.id into search_car from t_cars c where concat(marke,modell) = car;
+/*********************************************************************
+/**
+/** Procedure add_mitarbeiter
+/** In: _vorname – firstname
+/** In: _nachname – lastname
+/** In: _geburtsdatum – the birth date
+/** In: _fuehrerschein – is license valid.
+/** In: _standort – working place
+/** In: _gehaltsstufe - amount of salary
+/** Developer: if18b053, if18b045
+/** Description: This procedure adds a employee.
+/** 
+/*********************************************************************
+*/
 
-INSERT INTO T_BUCHUNGEN (kunde_fk, standort_fk, car_fk, datum_von, datum_bis, summe) VALUES (search_kunde,search_standort,search_car,to_date(von, 'dd/mm/yyyy'),to_date(bis, 'dd/mm/yyyy'), 0);
+CREATE OR REPLACE PROCEDURE add_mitarbeiter
+   (_vorname IN varchar2, _nachname IN varchar2, _geburtsdatum IN varchar2, _fuehrerschein IN varchar2, _standort IN VARCHAR2, _gehaltsstufe IN NUMBER)
+IS
+ l_n_standort_id NUMBER;
+ l_c_fueherschein_valid char;
+ l_n_person_id NUMBER;
+BEGIN
+	SELECT id INTO l_n_standort_id FROM T_ADRESSEN WHERE strasse = _standort;
+
+	IF _fuehrerschein = 'y' THEN
+		l_c_fueherschein_valid := 'y';
+	ELSE THEN
+		l_c_fueherschein_valid := 'n';
+	END IF;
+
+	INSERT INTO T_PERSONEN (vorname, nachname, geburtsdatum, fuehrerschein_valid) VALUES (_vorname, _nachname, to_date(_geburtsdatum, 'dd/mm/yyyy'), l_c_fueherschein_valid);
+	SELECT id INTO l_n_person_id FROM T_PERSONEN WHERE vorname = _vorname AND nachname = _nachname AND geburtsdatum = to_date(_geburtsdatum, 'dd/mm/yyyy') AND fuehrerschein_valid = l_c_fueherschein_valid;
+
+	INSERT INTO T_MITARBEITER (person_fk, standort_fk, gehalt) VALUES (l_n_person_id, l_n_standort_id, _gehaltsstufe);
 
   COMMIT;
-END add_booking;
+END add_mitarbeiter;
 /
