@@ -121,6 +121,53 @@ namespace Autoverleih
         {
             panel_buchungen_storno.Visible = true;
             panel_buchungen_storno.BringToFront();
+            checkedListBox2.ClearSelected();
+            Initialize_Buchungen_Storno();
+        }
+
+        private void Initialize_Buchungen_Storno()
+        {
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+
+                    OracleCommand cmd = new OracleCommand("select * from table(return_booking())", con);
+
+                    OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+                    DataTable dt = new DataTable();
+
+
+                    oda.Fill(dt);
+
+
+                    if (dt.Rows.Count > 0)
+
+                    {
+                        List<string> list = new List<string>();
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            list.Add(row["id"] + " - " + row["kunde"].ToString() + " - " + row["car"].ToString() + " - " + row["von"].ToString().Split(' ')[0] + " - " + row["bis"].ToString().Split(' ')[0]);
+                        }
+                        checkedListBox2.DataSource = list;
+                    }
+
+                }
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -426,6 +473,37 @@ namespace Autoverleih
 
             {
 
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+                    OracleCommand cmd = new OracleCommand("delete_booking", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("booking_id", OracleDbType.Int32).Value = checkedListBox2.CheckedItems[0].ToString().Split(' ')[0];
+
+                    con.Open();
+                    OracleDataAdapter da = new OracleDataAdapter(cmd);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Buchung storniert.");
+                }
+            }
+
+            catch (Exception ex)
+
+            {
                 MessageBox.Show(ex.ToString());
                 throw new Exception("Yeet");
             }

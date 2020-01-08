@@ -37,6 +37,8 @@
             this.schadenEintragenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.schadenRepariertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_buchungen = new System.Windows.Forms.Panel();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -80,8 +82,6 @@
             this.panel_welcome = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel_buchungen.SuspendLayout();
             this.panel_personen.SuspendLayout();
@@ -176,6 +176,23 @@
             this.panel_buchungen.Name = "panel_buchungen";
             this.panel_buchungen.Size = new System.Drawing.Size(800, 423);
             this.panel_buchungen.TabIndex = 7;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(15, 273);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(121, 21);
+            this.comboBox5.TabIndex = 10;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 256);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(38, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Kunde";
             // 
             // button2
             // 
@@ -480,9 +497,9 @@
             this.panel_buchungen_storno.Controls.Add(this.label4);
             this.panel_buchungen_storno.Controls.Add(this.checkedListBox2);
             this.panel_buchungen_storno.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_buchungen_storno.Location = new System.Drawing.Point(0, 0);
+            this.panel_buchungen_storno.Location = new System.Drawing.Point(0, 24);
             this.panel_buchungen_storno.Name = "panel_buchungen_storno";
-            this.panel_buchungen_storno.Size = new System.Drawing.Size(800, 423);
+            this.panel_buchungen_storno.Size = new System.Drawing.Size(800, 399);
             this.panel_buchungen_storno.TabIndex = 9;
             // 
             // button3
@@ -493,6 +510,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Stornieren";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label4
             // 
@@ -505,6 +523,7 @@
             // 
             // checkedListBox2
             // 
+            this.checkedListBox2.CheckOnClick = true;
             this.checkedListBox2.FormattingEnabled = true;
             this.checkedListBox2.Location = new System.Drawing.Point(15, 52);
             this.checkedListBox2.Name = "checkedListBox2";
@@ -584,35 +603,18 @@
             this.label16.Text = "Willkommen";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboBox5
-            // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(15, 273);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(121, 21);
-            this.comboBox5.TabIndex = 10;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 256);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 13);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "Kunde";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 423);
+            this.Controls.Add(this.panel_buchungen_storno);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panel_schaeden);
             this.Controls.Add(this.panel_buchungen);
             this.Controls.Add(this.panel_schaeden_storno);
             this.Controls.Add(this.panel_welcome);
-            this.Controls.Add(this.panel_schaeden);
             this.Controls.Add(this.panel_personen);
-            this.Controls.Add(this.panel_buchungen_storno);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
