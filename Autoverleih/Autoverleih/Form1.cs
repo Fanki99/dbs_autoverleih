@@ -115,8 +115,54 @@ namespace Autoverleih
         {
             panel_personen.Visible = true;
             panel_personen.BringToFront();
+            Initialize_Personen();
         }
-       
+
+        private void Initialize_Personen()
+        {
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+
+                    OracleCommand cmd = new OracleCommand("select * from table(return_standorte())", con);
+
+                    OracleDataAdapter oda = new OracleDataAdapter(cmd);
+
+                    DataTable dt = new DataTable();
+
+
+                    oda.Fill(dt);
+
+
+                    if (dt.Rows.Count > 0)
+
+                    {
+                        List<string> list = new List<string>();
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            list.Add(row["text"].ToString());
+                        }
+                        comboBox2.DataSource = list;
+                    }
+
+                }
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
+        }
+
         private void buchungStornierenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel_buchungen_storno.Visible = true;
@@ -539,6 +585,98 @@ namespace Autoverleih
             {
                 MessageBox.Show(ex.ToString());
                 throw new Exception("Yeet");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked) { 
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+                    OracleCommand cmd = new OracleCommand("add_mitarbeiter", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("_vorname", OracleDbType.Varchar2).Value = textBox1.Text;
+                    cmd.Parameters.Add("_nachname", OracleDbType.Varchar2).Value = textBox2.Text;
+                    cmd.Parameters.Add("_geburtsdatum", OracleDbType.Varchar2).Value = dateTimePicker3.Value.Date.ToString().Split(' ')[0];
+                        if (checkBox1.Checked)
+                        {
+                            cmd.Parameters.Add("_fuehrerschein", OracleDbType.Varchar2).Value = 'y';
+                        }else
+                        {
+                            cmd.Parameters.Add("_fuehrerschein", OracleDbType.Varchar2).Value = 'n';
+                        }
+                    cmd.Parameters.Add("_standort", OracleDbType.Varchar2).Value = comboBox2.SelectedItem.ToString();
+                    cmd.Parameters.Add("_gehaltsstufe", OracleDbType.Int32).Value = textBox3.Text;
+
+                    con.Open();
+                    OracleDataAdapter da = new OracleDataAdapter(cmd);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Mitarbeiter eingetragen.");
+                }
+            }
+
+            catch (Exception ex)
+
+            {
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
+            }
+            else
+            {
+                try
+                {
+
+                    string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                    using (OracleConnection con = new OracleConnection(ConString))
+
+                    {
+                        OracleCommand cmd = new OracleCommand("add_kunde", con);
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("_vorname", OracleDbType.Varchar2).Value = textBox1.Text;
+                        cmd.Parameters.Add("_nachname", OracleDbType.Varchar2).Value = textBox2.Text;
+                        cmd.Parameters.Add("_geburtsdatum", OracleDbType.Varchar2).Value = dateTimePicker3.Value.Date.ToString().Split(' ')[0];
+                        if (checkBox1.Checked)
+                        {
+                            cmd.Parameters.Add("_fuehrerschein", OracleDbType.Varchar2).Value = 'y';
+                        }
+                        else
+                        {
+                            cmd.Parameters.Add("_fuehrerschein", OracleDbType.Varchar2).Value = 'n';
+                        }
+                        if (checkBox3.Checked)
+                        {
+                            cmd.Parameters.Add("_stammkunde", OracleDbType.Varchar2).Value = 'y';
+                        }
+                        else
+                        {
+                            cmd.Parameters.Add("_stammkunde", OracleDbType.Varchar2).Value = 'n';
+                        }
+
+                        con.Open();
+                        OracleDataAdapter da = new OracleDataAdapter(cmd);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Kunde eingetragen.");
+                    }
+                }
+
+                catch (Exception ex)
+
+                {
+                    MessageBox.Show(ex.ToString());
+                    throw new Exception("Yeet");
+                }
             }
         }
     }
