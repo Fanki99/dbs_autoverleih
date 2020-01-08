@@ -508,6 +508,39 @@ namespace Autoverleih
                 throw new Exception("Yeet");
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string ConString = "Data Source=//localhost:1521/orcl.dbs.autoverleih; User Id=mitarbeiter;Password=db19;";
+
+                using (OracleConnection con = new OracleConnection(ConString))
+
+                {
+                    OracleCommand cmd = new OracleCommand("add_schaden", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("car", OracleDbType.Varchar2).Value = comboBox4.SelectedItem.ToString();
+                    cmd.Parameters.Add("schaden", OracleDbType.Varchar2).Value = richTextBox1.Text;
+                    cmd.Parameters.Add("datum", OracleDbType.Varchar2).Value = dateTimePicker4.Value.Date.ToString().Split(' ')[0];
+
+                    con.Open();
+                    OracleDataAdapter da = new OracleDataAdapter(cmd);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Schaden gemeldet.");
+                }
+            }
+
+            catch (Exception ex)
+
+            {
+                MessageBox.Show(ex.ToString());
+                throw new Exception("Yeet");
+            }
+        }
     }
 
 }

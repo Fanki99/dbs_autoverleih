@@ -426,9 +426,9 @@
             this.panel_schaeden.Controls.Add(this.richTextBox1);
             this.panel_schaeden.Controls.Add(this.label10);
             this.panel_schaeden.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_schaeden.Location = new System.Drawing.Point(0, 0);
+            this.panel_schaeden.Location = new System.Drawing.Point(0, 24);
             this.panel_schaeden.Name = "panel_schaeden";
-            this.panel_schaeden.Size = new System.Drawing.Size(800, 423);
+            this.panel_schaeden.Size = new System.Drawing.Size(800, 399);
             this.panel_schaeden.TabIndex = 9;
             // 
             // button5
@@ -439,6 +439,7 @@
             this.button5.TabIndex = 6;
             this.button5.Text = "Schaden melden";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label12
             // 
@@ -608,9 +609,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 423);
+            this.Controls.Add(this.panel_schaeden);
             this.Controls.Add(this.panel_buchungen_storno);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.panel_schaeden);
             this.Controls.Add(this.panel_buchungen);
             this.Controls.Add(this.panel_schaeden_storno);
             this.Controls.Add(this.panel_welcome);
