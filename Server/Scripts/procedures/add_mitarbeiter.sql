@@ -13,26 +13,26 @@
 /*********************************************************************
 */
 
-CREATE OR REPLACE PROCEDURE add_mitarbeiter
-   (_vorname IN varchar2, _nachname IN varchar2, _geburtsdatum IN varchar2, _fuehrerschein IN varchar2, _standort IN VARCHAR2, _gehaltsstufe IN NUMBER)
+create or replace NONEDITIONABLE PROCEDURE add_mitarbeiter
+   (vorname IN varchar2, nachname IN varchar2, geburtsdatum IN varchar2, fuehrerschein IN varchar2, standort IN VARCHAR2, gehaltsstufe IN NUMBER)
 IS
  l_n_standort_id NUMBER;
  l_c_fueherschein_valid char;
  l_n_person_id NUMBER;
 BEGIN
-	SELECT id INTO l_n_standort_id FROM T_ADRESSEN WHERE strasse = _standort;
+	SELECT id INTO l_n_standort_id FROM T_ADRESSEN WHERE strasse = standort;
 
-	IF _fuehrerschein = 'y' THEN
+	IF fuehrerschein = 'y' THEN
 		l_c_fueherschein_valid := 'y';
-	ELSE THEN
+	ELSE 
 		l_c_fueherschein_valid := 'n';
 	END IF;
 
-	INSERT INTO T_PERSONEN (vorname, nachname, geburtsdatum, fuehrerschein_valid) VALUES (_vorname, _nachname, to_date(_geburtsdatum, 'dd/mm/yyyy'), l_c_fueherschein_valid);
-	SELECT id INTO l_n_person_id FROM T_PERSONEN WHERE vorname = _vorname AND nachname = _nachname AND geburtsdatum = to_date(_geburtsdatum, 'dd/mm/yyyy') AND fuehrerschein_valid = l_c_fueherschein_valid;
+	INSERT INTO T_PERSONEN (vorname, nachname, geburtsdatum, fuehrerschein_valid) VALUES (vorname, nachname, to_date(geburtsdatum, 'dd/mm/yyyy'), l_c_fueherschein_valid);
+    COMMIT;
+	SELECT id INTO l_n_person_id FROM T_PERSONEN p WHERE p.vorname like vorname AND p.nachname like nachname order by id desc FETCH FIRST 1 ROWS ONLY;
 
-	INSERT INTO T_MITARBEITER (person_fk, standort_fk, gehalt) VALUES (l_n_person_id, l_n_standort_id, _gehaltsstufe);
+	INSERT INTO T_MITARBEITER (person_fk, standort_fk, gehalt) VALUES (l_n_person_id, l_n_standort_id, gehaltsstufe);
 
   COMMIT;
 END add_mitarbeiter;
-/
